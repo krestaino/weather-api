@@ -1,0 +1,10 @@
+/** 
+ *  Enter your Google Maps Geocoding API and Dark Sky API keys
+ *  https://developers.google.com/maps/documentation/geocoding/get-api-key
+ *  https://darksky.net/dev/
+ */
+
+module.exports = {
+  google: 'KEY_HERE',
+  darksky: 'KEY_HERE'
+}

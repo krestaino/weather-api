@@ -1,0 +1,22 @@
+{
+  "name": "weather-api",
+  "description": "API for Weather Vue.",
+  "author": "Kevin Restaino <kevinrestaino@gmail.com>",
+  "homepage": "https://api.kmr.io",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krestaino/weather-api.git"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.3",
+    "dark-sky": "^1.0.10",
+    "express": "^4.15.2",
+    "express-rate-limit": "^2.7.0",
+    "node-geocoder": "^3.16.0"
+  }
+}
