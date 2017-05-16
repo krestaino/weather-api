@@ -9,7 +9,7 @@ Rename `.keys.js.example` to `.keys.js` and add your [Google Geocoding API](http
 # install dependencies
 npm install
 
-# sstart server at localhost:3000
+# start server at localhost:3000
 npm run dev
 ```
 
