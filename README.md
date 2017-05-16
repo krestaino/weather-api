@@ -13,5 +13,9 @@ npm install
 npm run dev
 ```
 
+## Built With
+* [Dark Sky API](https://darksky.net/dev/)
+* [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/get-api-key)
+
 ## License 
 This project is licensed under the MIT License - see the LICENSE.md file for details
