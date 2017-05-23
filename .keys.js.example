@@ -1,10 +1,8 @@
 /** 
- *  Get your API keys here
- *  https://developers.google.com/maps/documentation/geocoding/get-api-key
+ *  Get your API key here
  *  https://darksky.net/dev/
  */
 
 module.exports = {
-  google: 'KEY_HERE',
   darksky: 'KEY_HERE'
 }
