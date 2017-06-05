@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express()
 const keys = require('./.keys')
 const DarkSky = require('dark-sky')
+const NodeGeocoder = require('node-geocoder')
 
 const limiter = new RateLimit({
   windowMs: 15*60*1000, // 15 minutes 
@@ -42,6 +43,47 @@ app.get('/weather/v1/json', function (req, res) {
     })
 
   console.log(req.method + ': /weather/v1/'+lat+'/'+lon+'/'+units)
+})
+
+// Google Maps Geocoding API
+var geocoder = NodeGeocoder(geocoderOptions)
+var geocoderOptions = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: keys.google,
+  formatter: null
+}
+
+app.get('/geocode/v1/json', function (req, res) {
+  let latlng = req.param('latlng')
+  let address = req.param('address')
+
+  if (latlng) {
+    let lat = latlng.split(',')[0]
+    let lon = latlng.split(',')[1]
+
+    geocoder.reverse({lat:lat, lon:lon})
+      .then(function (response) {
+        res.send(response)
+      })
+      .catch(function (error) {
+        res.send(error)
+      })
+
+    console.log(req.method + ': /geocode/v1/'+latlng)
+  }
+
+  if (address) {
+    geocoder.geocode(address)
+      .then(function (response) {
+        res.send(response)
+      })
+      .catch(function (error) {
+        res.send(error)
+      })
+
+    console.log(req.method + ': /geocode/v1/'+address)
+  }
 })
 
 app.listen(3000)
