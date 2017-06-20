@@ -1,5 +1,5 @@
 const express = require('express')
-const RateLimit = require('express-rate-limit');
+const RateLimit = require('express-rate-limit')
 const cors = require('cors')
 const app = express()
 const keys = require('./.keys')
@@ -7,12 +7,15 @@ const DarkSky = require('dark-sky')
 const NodeGeocoder = require('node-geocoder')
 
 const limiter = new RateLimit({
-  windowMs: 15*60*1000, // 15 minutes 
-  max: 100, // limit each IP to 100 requests per windowMs 
-  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+  // 15 minutes
+  windowMs: 15 * 60 * 1000,
+  // limit each IP to 100 requests per windowMs
+  max: 100,
+  // disable delaying - full speed until the max limit is reached
+  delayMs: 0
 })
 
-app.use(limiter);
+app.use(limiter)
 app.use(cors())
 
 // Home
@@ -42,12 +45,12 @@ app.get('/weather/v1/json', function (req, res) {
       res.send(error)
     })
 
-  console.log(req.method + ': /weather/v1/'+lat+'/'+lon+'/'+units)
+  console.log(req.method + ': /weather/v1/' + lat + '/' + lon + '/' + units)
 })
 
 // Google Maps Geocoding API
-var geocoder = NodeGeocoder(geocoderOptions)
-var geocoderOptions = {
+const geocoder = NodeGeocoder(geocoderOptions)
+const geocoderOptions = {
   provider: 'google',
   httpAdapter: 'https',
   apiKey: keys.google,
@@ -62,7 +65,7 @@ app.get('/geocode/v1/json', function (req, res) {
     let lat = latlng.split(',')[0]
     let lon = latlng.split(',')[1]
 
-    geocoder.reverse({lat:lat, lon:lon})
+    geocoder.reverse({lat: lat, lon: lon})
       .then(function (response) {
         res.send(response)
       })
@@ -70,7 +73,7 @@ app.get('/geocode/v1/json', function (req, res) {
         res.send(error)
       })
 
-    console.log(req.method + ': /geocode/v1/'+latlng)
+    console.log(req.method + ': /geocode/v1/' + latlng)
   }
 
   if (address) {
@@ -82,7 +85,7 @@ app.get('/geocode/v1/json', function (req, res) {
         res.send(error)
       })
 
-    console.log(req.method + ': /geocode/v1/'+address)
+    console.log(req.method + ': /geocode/v1/' + address)
   }
 })
 
