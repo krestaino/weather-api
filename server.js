@@ -50,7 +50,7 @@ app.get('/weather/v1/json', function (req, res) {
 
 // Google Maps Geocoding API
 const geocoder = NodeGeocoder(geocoderOptions)
-const geocoderOptions = {
+var geocoderOptions = {
   provider: 'google',
   httpAdapter: 'https',
   apiKey: keys.google,
