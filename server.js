@@ -2,9 +2,10 @@ const express = require('express')
 const RateLimit = require('express-rate-limit')
 const cors = require('cors')
 const app = express()
-const keys = require('./.keys')
 const DarkSky = require('dark-sky')
 const NodeGeocoder = require('node-geocoder')
+
+const keys = require('./keys')
 
 const limiter = new RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
