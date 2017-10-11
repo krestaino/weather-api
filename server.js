@@ -5,8 +5,10 @@ const app = express()
 const DarkSky = require('dark-sky')
 const NodeGeocoder = require('node-geocoder')
 
+// import API key for DarkSky
 const keys = require('./keys')
 
+// set express rate limiting and CORS
 const limiter = new RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -16,15 +18,10 @@ const limiter = new RateLimit({
 app.use(limiter)
 app.use(cors())
 
-// Home
-app.get('/', function (req, res) {
-  res.send('api.kmr.io')
-})
-
 // DarkSky API
 const forecast = new DarkSky(keys.darksky)
 
-app.get('/weather/v1/json', function (req, res) {
+app.get('/weather/v1/json', (req, res) => {
   let lat = req.param('lat')
   let lon = req.param('lon')
   let units = req.param('units')
@@ -36,18 +33,17 @@ app.get('/weather/v1/json', function (req, res) {
     .language('en')
     .exclude('minutely,hourly,flags')
     .get()
-    .then(function (response) {
+    .then(response => {
       res.send(response)
     })
-    .catch(function (error) {
+    .catch(error => {
       res.send(error)
     })
-
-  console.log(req.method + ': /weather/v1/' + lat + '/' + lon + '/' + units)
 })
 
 // Google Maps Geocoding API
 const geocoder = NodeGeocoder(geocoderOptions)
+
 var geocoderOptions = {
   provider: 'google',
   httpAdapter: 'https',
@@ -55,7 +51,7 @@ var geocoderOptions = {
   formatter: null
 }
 
-app.get('/geocode/v1/json', function (req, res) {
+app.get('/geocode/v1/json', (req, res) => {
   let latlng = req.param('latlng')
   let address = req.param('address')
 
@@ -64,26 +60,22 @@ app.get('/geocode/v1/json', function (req, res) {
     let lon = latlng.split(',')[1]
 
     geocoder.reverse({lat: lat, lon: lon})
-      .then(function (response) {
+      .then(response => {
         res.send(response)
       })
-      .catch(function (error) {
+      .catch(error => {
         res.send(error)
       })
-
-    console.log(req.method + ': /geocode/v1/' + latlng)
   }
 
   if (address) {
     geocoder.geocode(address)
-      .then(function (response) {
+      .then(response => {
         res.send(response)
       })
-      .catch(function (error) {
+      .catch(error => {
         res.send(error)
       })
-
-    console.log(req.method + ': /geocode/v1/' + address)
   }
 })
 
