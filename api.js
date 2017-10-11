@@ -7,14 +7,15 @@ const NodeGeocoder = require('node-geocoder')
 // import API key for DarkSky
 const keys = require('./keys')
 
+// create app
+const app = express()
+
 // set express rate limiting and CORS
 const limiter = new RateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
   delayMs: 0 // disable delaying - full speed until the max limit is reached
 })
-
-const app = express()
 
 app.use(limiter)
 app.use(cors())
