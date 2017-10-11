@@ -1,7 +1,6 @@
 const express = require('express')
 const RateLimit = require('express-rate-limit')
 const cors = require('cors')
-const app = express()
 const DarkSky = require('dark-sky')
 const NodeGeocoder = require('node-geocoder')
 
@@ -14,6 +13,8 @@ const limiter = new RateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
   delayMs: 0 // disable delaying - full speed until the max limit is reached
 })
+
+const app = express()
 
 app.use(limiter)
 app.use(cors())
