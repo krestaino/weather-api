@@ -7,12 +7,9 @@ const DarkSky = require('dark-sky')
 const NodeGeocoder = require('node-geocoder')
 
 const limiter = new RateLimit({
-  // 15 minutes
-  windowMs: 15 * 60 * 1000,
-  // limit each IP to 100 requests per windowMs
-  max: 100,
-  // disable delaying - full speed until the max limit is reached
-  delayMs: 0
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  delayMs: 0 // disable delaying - full speed until the max limit is reached
 })
 
 app.use(limiter)
