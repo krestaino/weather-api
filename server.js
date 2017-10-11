@@ -86,5 +86,6 @@ app.get('/geocode/v1/json', function (req, res) {
   }
 })
 
-app.listen(3000)
-console.log('API ready.')
+app.listen(3000, function() {
+  console.log('Listening on port ' + this.address().port)
+})
