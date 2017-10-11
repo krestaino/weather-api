@@ -10,7 +10,7 @@
     "url": "https://github.com/krestaino/weather-api.git"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node api.js"
   },
   "dependencies": {
     "cors": "^2.8.3",
