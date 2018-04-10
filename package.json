@@ -13,10 +13,10 @@
     "start": "node api.js"
   },
   "dependencies": {
-    "cors": "^2.8.3",
-    "dark-sky": "^1.0.10",
+    "cors": "^2.8.4",
+    "dark-sky": "^1.1.2",
     "express": "^4.15.2",
-    "express-rate-limit": "^2.7.0",
-    "node-geocoder": "^3.16.0"
+    "express-rate-limit": "^2.11.0",
+    "node-geocoder": "^3.22.0"
   }
 }
