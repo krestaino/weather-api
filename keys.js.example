@@ -1,8 +1,10 @@
 /** 
- *  Get your API key here
+ *  Get your API keys here
  *  https://darksky.net/dev/
+ *  https://developers.google.com/maps/documentation/javascript/get-api-key
  */
 
 module.exports = {
-  darksky: 'KEY_HERE'
+  darksky: 'KEY_HERE',
+  google: 'KEY_HERE'
 }
