@@ -23,9 +23,9 @@ app.use(cors())
 const forecast = new DarkSky(keys.darksky)
 
 app.get('/weather/v1/json', (req, res) => {
-  let lat = req.param('lat')
-  let lon = req.param('lon')
-  let units = req.param('units')
+  let lat = req.query.lat
+  let lon = req.query.lon
+  let units = req.query.units
 
   forecast
     .latitude(lat)
@@ -48,8 +48,8 @@ var googleMapsClient = require('@google/maps').createClient({
 })
 
 app.get('/geocode/v1/json', (req, res) => {
-  let latlng = req.param('latlng')
-  let address = req.param('address')
+  let latlng = req.query.latlng
+  let address = req.query.address
 
   if (latlng) {
     googleMapsClient.reverseGeocode({
