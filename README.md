@@ -4,12 +4,12 @@ API backend for [Weather Vue](https://github.com/krestaino/weather-vue).
 
 ## Getting Started
 
-Rename `keys.js.example` to `keys.js` and add your [Dark Sky API](https://darksky.net/dev/) key. 
+Rename `keys.js.example` to `keys.js` and add your [Dark Sky API](https://darksky.net/dev/) and [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/get-api-key) keys. 
 ``` bash
 # install dependencies
 npm install
 
-# start api at localhost:3000
+# start API at localhost:3000
 npm start
 ```
 
