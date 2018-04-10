@@ -2,7 +2,6 @@ const express = require('express')
 const RateLimit = require('express-rate-limit')
 const cors = require('cors')
 const DarkSky = require('dark-sky')
-const NodeGeocoder = require('node-geocoder')
 
 // import API key for DarkSky
 const keys = require('./keys')
@@ -44,40 +43,32 @@ app.get('/weather/v1/json', (req, res) => {
 })
 
 // Google Maps Geocoding API
-const geocoder = NodeGeocoder(geocoderOptions)
-
-var geocoderOptions = {
-  provider: 'google',
-  httpAdapter: 'https',
-  apiKey: keys.google,
-  formatter: null
-}
+var googleMapsClient = require('@google/maps').createClient({
+  key: keys.google
+});
 
 app.get('/geocode/v1/json', (req, res) => {
   let latlng = req.param('latlng')
   let address = req.param('address')
 
   if (latlng) {
-    let lat = latlng.split(',')[0]
-    let lon = latlng.split(',')[1]
-
-    geocoder.reverse({lat: lat, lon: lon})
-      .then(response => {
-        res.send(response)
-      })
-      .catch(error => {
-        res.send(error)
-      })
+    googleMapsClient.reverseGeocode({
+      latlng: latlng
+    }, function(err, response) {
+      if (!err) {
+        res.send(response.json.results)
+      }
+    })
   }
 
   if (address) {
-    geocoder.geocode(address)
-      .then(response => {
-        res.send(response)
-      })
-      .catch(error => {
-        res.send(error)
-      })
+    googleMapsClient.geocode({
+      address: address
+    }, function(err, response) {
+      if (!err) {
+        res.send(response.json.results)
+      }
+    })
   }
 })
 

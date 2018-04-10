@@ -13,10 +13,10 @@
     "start": "node api.js"
   },
   "dependencies": {
+    "@google/maps": "^0.4.6",
     "cors": "^2.8.4",
     "dark-sky": "^1.1.2",
     "express": "^4.15.2",
-    "express-rate-limit": "^2.11.0",
-    "node-geocoder": "^3.22.0"
+    "express-rate-limit": "^2.11.0"
   }
 }
