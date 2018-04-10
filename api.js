@@ -45,7 +45,7 @@ app.get('/weather/v1/json', (req, res) => {
 // Google Maps Geocoding API
 var googleMapsClient = require('@google/maps').createClient({
   key: keys.google
-});
+})
 
 app.get('/geocode/v1/json', (req, res) => {
   let latlng = req.param('latlng')
@@ -54,7 +54,7 @@ app.get('/geocode/v1/json', (req, res) => {
   if (latlng) {
     googleMapsClient.reverseGeocode({
       latlng: latlng
-    }, function(err, response) {
+    }, function (err, response) {
       if (!err) {
         res.send(response.json.results)
       }
@@ -64,7 +64,7 @@ app.get('/geocode/v1/json', (req, res) => {
   if (address) {
     googleMapsClient.geocode({
       address: address
-    }, function(err, response) {
+    }, function (err, response) {
       if (!err) {
         res.send(response.json.results)
       }
@@ -72,6 +72,6 @@ app.get('/geocode/v1/json', (req, res) => {
   }
 })
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log('Listening on port ' + this.address().port)
 })
