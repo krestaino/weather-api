@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const RateLimit = require('express-rate-limit')
 
+const ping = require('./routes/ping.js')
 const geocode = require('./routes/geocode.js')
 const weather = require('./routes/weather.js')
 
@@ -16,6 +17,7 @@ const limiter = new RateLimit({
 
 app.use(cors())
 app.use(limiter)
+app.use(ping)
 app.use(geocode)
 app.use(weather)
 
